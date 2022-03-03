@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="bg-gradient-to-r from-cyan-500 to-blue-500 min-h-screen flex justify-center items-center">
+            <div class="bg-white p-4 rounded-lg divide-y-2 space-y-2 max-w-4xl w-full">
+                <div>
+                    <button class="bg-sky-500 p-2 rounded-md text-white hover:bg-yellow-400 duration-300" id="btn">Copy</button>
+                </div>
+                <textarea class="w-full h-96 focus:outline-none p-2 border" id="main"></textarea>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
+        <script>
+            const newText = () => {
+                let str = '';
+
+                toastr.success('Copy to your clipboard');
+                for (let index = 0; index < 200; index++) {
+                    str = str + ' ' + faker.random.words(1).toLowerCase();
+                }
+
+                document.getElementById('main').value = str;
+                myFunction();
+            };
+            function myFunction() {
+                var copyText = document.getElementById('main');
+                copyText.select();
+                copyText.setSelectionRange(0, 99999);
+                navigator.clipboard.writeText(copyText.value);
+            }
+
+            newText();
+
+            document.getElementById('btn').addEventListener('click', () => {
+                newText();
+            });
+        </script>
+    </body>
+</html>
